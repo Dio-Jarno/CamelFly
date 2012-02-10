@@ -64,7 +64,7 @@ public class CamelFly {
 						.when(header("CountryCode").isEqualTo("AT")).setHeader("CamelFileName", simple("AT")).to("direct:feed")
 						.when(header("CountryCode").isEqualTo("CH")).setHeader("CamelFileName", simple("CH")).to("direct:feed");
 					
-					// Create for every country channel a temp rss file. TEST
+					// Create for every country channel a temp rss file.
 					from("direct:feed").marshal().rss().transform().xpath("/rss/channel/item").to("file:rss?autoCreate=true&fileExist=Append");
 				}
 			});
